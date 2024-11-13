@@ -1,0 +1,8 @@
+*/ipch/
+*/Release/
+*/Debug/
+*/x86/
+*/x64/
+*.ncb
+*.sdf
+*.old

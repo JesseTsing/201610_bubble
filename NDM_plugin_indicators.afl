@@ -1,0 +1,29 @@
+
+Lookback = Param("lookback",130,5,1000,1);
+LocPeak = NDM_Peak(C,Lookback);
+LocTrough = NDM_Trough(C,Lookback);
+
+
+Plot(Locpeak,"locpeak",colorRed);
+Plot(LocTrough,"locTrough",colorGreen);
+
+locall = LocPeak+LocTrough;
+indicator = 100 * ( locall  - LLV( locall,Lookback) )/( HHV(locall,Lookback) - LLV(locall,Lookback) );
+
+Cstudy = indicator - Ref(indicator,-2);
+stdc=StDev(Cstudy,Lookback);
+zscore=IIf(stdc==0,0,Cstudy/stdc);
+
+Plot(zscore,"zscore",colorYellow);
+
+
+////////////////// triangles ratio
+
+alltriangles = Lookback * (Lookback-1)/2;
+
+locpeak_r = Nz(LocPeak)/alltriangles;
+LocTrough_r = Nz(LocTrough)/alltriangles;
+//Plot(alltriangles,"alltriangles",colorBrown);
+Plot(locpeak_r,"locpeak_r",colorAqua);
+Plot(LocTrough_r,"LocTrough_r",colorBrightGreen);
+
